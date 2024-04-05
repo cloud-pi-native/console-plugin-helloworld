@@ -1,6 +1,8 @@
 # Cloud Pi Native plugin: Hello World
 
-Exemple de création d'un plugin pour la console [Cloud π Native](https://github.com/cloud-pi-native/console)
+La console [Cloud π Native](https://github.com/cloud-pi-native/console) a un système de hook permettant d'étendre ses fonctionnalités via des plugins.
+
+Ce dépôt décrit la structure attendue ainsi que les différentes hook auxquels il est possible de se rattacher.
 
 ## Installation
 
