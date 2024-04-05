@@ -6,7 +6,7 @@ Ce dépôt décrit la structure attendue ainsi que les différents hook auxquels
 
 ## Installation
 
-La console Cloud Pi Native et les plugins associés sont codés en JavaScript/TypeScript
+La console Cloud Pi Native et les plugins associés sont codés en JavaScript/TypeScript.
 
 ### Dépendances
 Les dépendances suivantes sont nécessaires:
@@ -25,7 +25,7 @@ Dans cet exemple, le code est divisé en 2 fichiers:
 - monitor.js: optionnel, logique pour pouvoir monitorer le plugin (appel à un service externe qui retourne un code http 200, etc...)
 
 ### Point d'entrée
-Le fichier index.ts sert de point d'entrée pour le chargement du plugin et l'inscription aux hooks disponibles
+Le fichier index.ts sert de point d'entrée pour le chargement du plugin et l'inscription aux hooks disponibles.
 
 ```ts
 import { type Plugin, ServiceInfos } from '@cpn-console/hooks'
@@ -101,7 +101,7 @@ La fonction de callback doit respecter certaines règles:
 
 Voici le code minimal pour un callback sur le hook `upsertProject`.
 
-Ce code permet d'afficher un message sur le journal de la console (voir capture d'écran après)
+Ce code permet d'afficher un message sur le journal de la console (voir capture d'écran après).
 ```ts
 import { parseError, type Project, type StepCall } from '@cpn-console/hooks'
 
@@ -128,11 +128,11 @@ export const upsertProjectHelloWorld: StepCall<Project> = async (_payload) => {
 }
 ```
 
-Journal de la console, disponibles pour les administrateurs
+Journal de la console, disponibles pour les administrateurs.
 ![admin_jounaux](docs/img/admin_journaux.png)
 
 
-Correspondance hook / type:
+Correspondance hook / type (pour le StepCall):
 | Nom du hook | Type |
 |-------------|-------------|
 | upsertCluster | ClusterObject |
@@ -144,9 +144,9 @@ Correspondance hook / type:
 | fetchOrganizations | EmptyPayload |
 | retrieveUserByEmail | UserLite, type User avec seulemement les propriété: email |
 
-Pour plus d'information sur les types, un diagramme est disponible [ici](docs/types.md)
+Pour plus d'information sur les types, un diagramme est disponible [ici](docs/types.md).
 
-Le type `EmptyPayload` est un type spécial qui ne contient rien
+Le type `EmptyPayload` est un type spécial qui ne contient rien.
 
 ## Monitoring
 Cette partie est optionnelle, elle permet d'afficher une tuile sur la page `Status des services`, exemple pour un service qui va bien:
