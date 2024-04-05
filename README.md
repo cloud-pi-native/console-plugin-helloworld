@@ -77,16 +77,16 @@ Dans notre exemple, notre plugin demande à s'inscrire au hook `UpsertProject` �
 | deleteCluster | Suppression d'un cluster |
 | upsertProject | Création / modification d'un projet |
 | deleteProject | Suppression d'un projet |
-| getProjectSecrets |  |
-| checkServices |  | 
-| fetchOrganizations |  |
-| retrieveUserByEmail |  |
+| getProjectSecrets | Récupère certains secrets du projet qui sont dans le Vault (page Tableau de bord - bouton afficher les secrets) |
+| checkServices | Récupère le dernier état de la propriété monitor | 
+| fetchOrganizations | Récupère une liste d'organisation depuis un référentiel externe (page Admin > Organisation) |
+| retrieveUserByEmail | Récupère l'utilisateur dans le keycloak s'il n'existe pas dans la DB pour l'y injecter (une seule fois par utilisateur) |
 
 
 Pour chaque hook, les étapes suivantes sont disponibles:
 | Etape | Description |
 |-------|-------------|
-| check | |
+| check |  |
 | pre | Appel de la fonction du plugin avant l'action |
 | main | Appel de la fonction du plugin après l'action |
 | post | Appel de la fonction du plugin après l'action, cela permet d'avoir certain pré-requis lors de l'étape précédente |
