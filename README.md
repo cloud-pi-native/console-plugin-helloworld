@@ -2,11 +2,11 @@
 
 La console [Cloud π Native](https://github.com/cloud-pi-native/console) a un système de hook permettant d'étendre ses fonctionnalités via des plugins.
 
-Ce dépôt décrit la structure attendue ainsi que les différentes hook auxquels il est possible de se rattacher.
+Ce dépôt décrit la structure attendue ainsi que les différents hook auxquels il est possible de se rattacher.
 
 ## Installation
 
-La console Cloud Pi Native et les plugins associés sont codés en javascript/typescript
+La console Cloud Pi Native et les plugins associés sont codés en JavaScript/TypeScript
 
 ### Dépendances
 Les dépendances suivantes sont nécessaires:
@@ -41,7 +41,7 @@ const infos: ServiceInfos = {
 
 export const plugin: Plugin = {
   infos, // Informations générales du plugin
-  subscribedHooks: { // Listes des hooks souscrits
+  subscribedHooks: { // Liste des hooks souscrits
     upsertProject: { // Nom du hook, voir liste complète des hooks disponibles
       steps: {
         main: upsertProjectHelloWorld, // Fonction que le plugin manager appelera lors de l'étape main du hook upsertProject
@@ -51,22 +51,22 @@ export const plugin: Plugin = {
 }
 ```
 
-La variable de type `ServiceInfos` définit un certain nombre de propriété pour le plugin.
+La variable de type `ServiceInfos` définit un certain nombre de propriétés pour le plugin.
 
 - Propriétés obligatoires:
   - `name`: contient le nom interne du plugin, doit être unique
 
-- Propriétés facultatives, utile pour l'affichage d'une tuile dans la page `Mes Services` (voir image plus bas):
-  - `to`: l'URL vers un service externe (exemple vers une instance gitlab, harbor, vault, etc)
+- Propriétés facultatives, utilisées pour l'affichage d'une tuile dans la page `Mes Services` (voir image plus bas):
+  - `to`: l'URL vers un service externe (exemple vers une instance GitLab, Harbor, Vault, etc...)
   - `title`: titre à afficher sur la tuile
-  - `imgSrc`: URL vers une icone ou une icône encodée en base64 (voir le site [suivant](http://base64online.org/encode/) pour pouvoir le faire - penser à cocher la case Format as Data URL)
+  - `imgSrc`: URL vers une icône ou une icône encodée en base64 (voir le site [suivant](http://base64online.org/encode/) pour pouvoir le faire - penser à cocher la case Format as Data URL)
   - `description`: description laconique du service
 
 ![](docs/img/messervices.png)
 ---
 La variable de type `Plugin` enregistre le plugin auprès du PluginManager.
 
-Le propriété `subscribedHooks` définit la liste des hooks auquels notre plugin veut réagir ainsi qu'à quelle étape il doit être appelé.
+La propriété `subscribedHooks` définit la liste des hooks auquels notre plugin veut réagir ainsi qu'à quelle étape il doit être appelé.
 
 Dans notre exemple, notre plugin demande à s'inscrire au hook `UpsertProject` à l'étape `main`. Ainsi quand un projet sera créé ou modifié, la fonction `upsertProjectHelloWorld` sera appelée.
 
@@ -79,7 +79,7 @@ Dans notre exemple, notre plugin demande à s'inscrire au hook `UpsertProject` �
 | deleteProject | Suppression d'un projet |
 | getProjectSecrets | Récupère certains secrets du projet qui sont dans le Vault (page Tableau de bord - bouton afficher les secrets) |
 | checkServices | Récupère le dernier état de la propriété monitor | 
-| fetchOrganizations | Récupère une liste d'organisation depuis un référentiel externe (page Admin > Organisation) |
+| fetchOrganizations | Récupère une liste d'organisations depuis un référentiel externe (page Admin > Organisation) |
 | retrieveUserByEmail | Récupère l'utilisateur dans le keycloak s'il n'existe pas dans la DB pour l'y injecter (une seule fois par utilisateur) |
 
 
