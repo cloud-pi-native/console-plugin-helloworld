@@ -10,7 +10,7 @@ La console Cloud Pi Native et les plugins associés sont codés en JavaScript/Ty
 
 ### Dépendances
 Les dépendances suivantes sont nécessaires:
-- "@cpn-console/hooks": Permet de s'inscrire à des hooks
+- "@cpn-console/hooks": Fonctions utilitaires et typages des hooks
 - "@cpn-console/shared": Fonctions utilitaires
 
 Les dépendances de développement suivantes sont optionnelles:
@@ -19,10 +19,10 @@ Les dépendances de développement suivantes sont optionnelles:
 
 
 ## Développement
-Dans cet exemple, le code est divisé en 2 fichiers:
+Dans cet exemple, le code est divisé en 3 fichiers:
 - index.ts: point d'entrée du plugin contenant des informations à propos de ce dernier
-- function.js: logique métier du plugin
-- monitor.js: optionnel, logique pour pouvoir monitorer le plugin (appel à un service externe qui retourne un code http 200, etc...)
+- function.ts: logique métier du plugin
+- monitor.ts: optionnel, logique pour pouvoir monitorer le service externe
 
 ### Point d'entrée
 Le fichier index.ts sert de point d'entrée pour le chargement du plugin et l'inscription aux hooks disponibles.
@@ -33,7 +33,7 @@ import { upsertProjectHelloWorld } from './functions.js'
 
 const infos: ServiceInfos = {
   name: 'helloworld', // Nom interne du plugin, doit être unique
-  to: ({ clusters }) => 'https://example.com/', // Lien vers le service
+  to: () => 'https://example.com/', // Lien vers le service
   title: 'Hello World', // Titre sur la tuile `Mes Services`
   imgSrc: '', // Icône (url externe ou en base64)
   description: 'Hi world', // Description laconique du service
@@ -77,8 +77,8 @@ Dans notre exemple, notre plugin demande à s'inscrire au hook `UpsertProject` �
 | deleteCluster | Suppression d'un cluster |
 | upsertProject | Création / modification d'un projet |
 | deleteProject | Suppression d'un projet |
-| getProjectSecrets | Récupère certains secrets du projet qui sont dans le Vault (page Tableau de bord - bouton afficher les secrets) |
-| checkServices | Récupère le dernier état de la propriété monitor | 
+| getProjectSecrets | Récupère certains secrets du projet qui sont dans le Vault (ou stocké ailleurs au choix du plugin, page Tableau de bord -> bouton afficher les secrets) |
+| checkServices | *non implémenté pour le moment* | 
 | fetchOrganizations | Récupère une liste d'organisations depuis un référentiel externe (page Admin > Organisation) |
 | retrieveUserByEmail | Récupère l'utilisateur dans le keycloak s'il n'existe pas dans la DB pour l'y injecter (une seule fois par utilisateur) |
 
@@ -120,7 +120,7 @@ export const upsertProjectHelloWorld: StepCall<Project> = async (_payload) => {
     return {
       status: {
         result: 'KO', 
-        message: 'An error happend while creating Grafana instance',
+        message: 'An error happend while creating Grafana instance', // obligatoire en cas de KO
       },
       error: parseError(error), // parseError: fonction utilitaire permettant d'avoir la stacktrace complète de l'erreur
     }
@@ -142,7 +142,7 @@ Correspondance hook / type (pour le StepCall):
 | getProjectSecrets | ProjectLite, type Project avec seulement les propriétés: id, name, organization |
 | checkServices | EmptyPayload |
 | fetchOrganizations | EmptyPayload |
-| retrieveUserByEmail | UserLite, type User avec seulemement les propriété: email |
+| retrieveUserByEmail | UserLite, type User avec seulemement la propriété: email |
 
 Pour plus d'information sur les types, un diagramme est disponible [ici](docs/types.md).
 
